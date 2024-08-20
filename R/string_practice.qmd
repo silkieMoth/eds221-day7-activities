@@ -3,3 +3,20 @@ title: "string_practice"
 format: html
 ---
 
+```{r}
+rm(list = ls())
+```
+
+
+```{r}
+alarm_report <- data.table::data.table(
+           date = c("2020-03-14", "2020-03-15", "2020-04-10", "2020-04-18"),
+       building = c("Engineering-North","Bren Hall",
+                    "Engineering-South","Engr-North"),
+  alarm_message = c("10:02am -- HVAC system down, facilities management alerted",
+                    "8:24am -- Elevator North out of service",
+                    "12:41am -- Fire alarm, UCSB fire responded and cleared",
+                    "9:58pm -- Campus point emergency siren, UCPD responded")
+)
+```
+
