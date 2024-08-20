@@ -7,6 +7,12 @@ format: html
 rm(list = ls())
 ```
 
+```{r}
+library(tidyverse)
+library(datapasta)
+library(stringr)
+library(lubridate)
+```
 
 ```{r}
 alarm_report <- data.table::data.table(
@@ -18,5 +24,16 @@ alarm_report <- data.table::data.table(
                     "12:41am -- Fire alarm, UCSB fire responded and cleared",
                     "9:58pm -- Campus point emergency siren, UCPD responded")
 )
+```
+
+## everything
+```{r}
+string_fun <- alarm_report %>% 
+  mutate(building = str_replace(building, pattern = "Engr", replacement = "Engineering")) %>%
+  mutate(wing = str_split_i(building, "-", 2), building = str_split_i(building, "-", 1)) %>% 
+  filter(str_detect(alarm_message, "responded") == TRUE) %>% 
+  mutate(message = str_split_i(alarm_message, "--", 2), time_of_message = str_split_i(alarm_message, "--", 1)) %>% 
+  select(-alarm_message) %>%
+  mutate(date = ymd(date))
 ```
 
